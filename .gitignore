@@ -1,5 +1,5 @@
 venv
-redis*
+redis-*
 poppunk/GPS_v4
 poppunk/poppunk_clusters_flask
 try_rq.py
