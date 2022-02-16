@@ -1,8 +1,9 @@
 import requests
 import os
 
+
 def add(a,b):
-    return str(a+b)
+    return a+b
 
 def count_lines(path):
     file = open(path, "r")
@@ -11,7 +12,7 @@ def count_lines(path):
         if line != "\n":
             line_count += 1
     file.close()
-    return str(line_count)
+    return line_count
 
 def poppunk_assign(path):
     os.system('''
@@ -19,4 +20,4 @@ def poppunk_assign(path):
     poppunk_assign --db GPS_v4 --query input_data/qfile.txt --output poppunk_clusters_flask --threads 4
     '''
     %path)
-    return "Result stored in flask-tutorial/poppunk/poppunk_clusters_flask"
+    return path+"/poppunk_clusters_flask"
