@@ -7,6 +7,7 @@ You need
 - [Flask](https://flask.palletsprojects.com/en/1.0.x/installation/#installation)
 - [Redis](https://redis.io/download)
 - [rq](https://python-rq.org/)
+- [PopPUNK](https://github.com/johnlees/PopPUNK)
 
 installed. 
 
