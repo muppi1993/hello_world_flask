@@ -68,7 +68,7 @@ def try_rq():
 def try_poppunk():
   q = Queue(connection=redis)
   result = q.enqueue(poppunk_assign,request.json['path'])
-  return jsonify({"id": result.id, "status":"curl http://127.0.0.1:5000/status/"+result.id,"result": "curl http://127.0.0.1:5000/result/"+result.id})
+  return jsonify({"id": result.id, "status":"http://127.0.0.1:5000/status/"+result.id,"result": "http://127.0.0.1:5000/result/"+result.id})
   #curl -H "Content-Type: application/json" --data '{"path":"/home/mmg220/Documents/flask-tutorial/poppunk"}' http://127.0.0.1:5000/poppunk
 
 
