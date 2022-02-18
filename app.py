@@ -57,7 +57,7 @@ def try_rq():
   result = q.enqueue(add, 5,5)
   result2 = q.enqueue(count_lines, 'poppunk/input_data/qfile.txt')
   print(result.id)
-  return jsonify([{"id": result.id, "status":"curl http://127.0.0.1:5000/status/"+result.id,"result": "curl http://127.0.0.1:5000/result/"+result.id},
+  return jsonify([{"id": result.id, "status":"http://127.0.0.1:5000/status/"+result.id,"result": "http://127.0.0.1:5000/result/"+result.id},
   {"id": result2.id, "status":"curl http://127.0.0.1:5000/status/"+result2.id,"result": "curl http://127.0.0.1:5000/result/"+result2.id}])
   #curl http://127.0.0.1:5000/rq
 
