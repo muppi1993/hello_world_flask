@@ -4,10 +4,11 @@ Project to learn and try out Flask and rq
 Clone the repo on your machine. 
 
 You need 
+- [Pyton3](https://www.python.org/downloads/)
 - [Docker](https://docs.docker.com/engine/install/)
 - [PopPUNK](https://github.com/johnlees/PopPUNK)
 
-installed, as well as the dependencies in requirements.txt.
+installed, as well as the dependencies in requirements.txt. These can be installed with with `pip install -r requirements.txt`
 
 Go to the project folder and
 1. run the flask app with `flask run`
