@@ -1,17 +1,16 @@
-from flask import Flask
-from flask import request
-from flask import jsonify
+from flask import Flask, request, jsonify
 from flask_expects_json import expects_json
 import datetime
-
-from rq_function import add, count_lines, poppunk_assign
 from redis import Redis
 from rq import Queue
 from rq.job import Job
 
-app = Flask(__name__)
+from rq_function import add, count_lines, poppunk_assign
 
+
+app = Flask(__name__)
 redis=Redis()
+
 
 schema = {
   "type": "object",
@@ -23,6 +22,7 @@ schema = {
   "required": ["firstname"]
 }
 
+
 schema2 = {
   "type": "object",
   "properties": {
@@ -31,11 +31,13 @@ schema2 = {
   "required": ["path"]
 }
 
+
 #homepage
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
     
+
 #take json input (according to schema) and return json
 @app.route("/json", methods=['POST'])
 @expects_json(schema)
@@ -46,6 +48,7 @@ def read_json():
     else:
         return jsonify({"greeting": "Hello, " + request.json['firstname'], "timestamp":timestamp})
     #curl -H "Content-Type: application/json" --data '{"firstname": "Marie","lastname":"Gronemeyer","age":29}' http://127.0.0.1:5000/json
+
 
 #run some jobs in a rq
 @app.route("/rq")
@@ -58,6 +61,7 @@ def try_rq():
   {"id": result2.id, "status":"curl http://127.0.0.1:5000/status/"+result2.id,"result": "curl http://127.0.0.1:5000/result/"+result2.id}])
   #curl http://127.0.0.1:5000/rq
 
+
 #run poppunk in a rq
 @app.route("/poppunk", methods=['POST'])
 @expects_json(schema2)
@@ -67,6 +71,7 @@ def try_poppunk():
   return jsonify({"id": result.id, "status":"curl http://127.0.0.1:5000/status/"+result.id,"result": "curl http://127.0.0.1:5000/result/"+result.id})
   #curl -H "Content-Type: application/json" --data '{"path":"/home/mmg220/Documents/flask-tutorial/poppunk"}' http://127.0.0.1:5000/poppunk
 
+
 #get job status
 @app.route("/status/<id>")
 def get_status(id):
@@ -75,6 +80,7 @@ def get_status(id):
     return jsonify ({"id": id, "status":job.get_status(), "result":job.result, "result location": "curl http://127.0.0.1:5000/result/"+id})
   else:
     return jsonify ({"id": id, "status":job.get_status()})
+
 
 #get job result
 @app.route("/result/<id>")

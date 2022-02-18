@@ -5,6 +5,7 @@ import os
 def add(a,b):
     return a+b
 
+
 def count_lines(path):
     file = open(path, "r")
     line_count = 0
@@ -13,6 +14,7 @@ def count_lines(path):
             line_count += 1
     file.close()
     return line_count
+
 
 def poppunk_assign(path):
     os.system('''
