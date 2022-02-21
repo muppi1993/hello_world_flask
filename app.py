@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_expects_json import expects_json
+import json
 import datetime
 from redis import Redis
 from rq import Queue
@@ -12,24 +13,14 @@ app = Flask(__name__)
 redis = Redis()
 
 
-schema = {
-    "type": "object",
-    "properties": {
-        "firstname": {"type": "string"},
-        "lastname": {"type": "string"},
-        "age": {"type": "number"}
-    },
-    "required": ["firstname"]
-}
+def get_schema(path):
+    with open(path, 'r') as file:
+        schema = json.load(file)
+    return schema
 
 
-schema2 = {
-    "type": "object",
-    "properties": {
-        "path": {"type": "string"}
-    },
-    "required": ["path"]
-}
+schema_json_input = get_schema('./spec/input_json.schema.json')
+schema_poppunk_input = get_schema('./spec/input_poppunk.schema.json')
 
 
 # homepage
@@ -40,7 +31,7 @@ def hello_world():
 
 # take json input (according to schema) and return json
 @app.route("/json", methods=['POST'])
-@expects_json(schema)
+@expects_json(schema_json_input)
 def read_json():
     timestamp = datetime.datetime.now().isoformat()
     if 'lastname' in request.json:
@@ -64,7 +55,7 @@ def try_rq():
 
 # run poppunk in a rq
 @app.route("/poppunk", methods=['POST'])
-@expects_json(schema2)
+@expects_json(schema_poppunk_input)
 def try_poppunk():
     q = Queue(connection=redis)
     result = q.enqueue(poppunk_assign, request.json['path'])
