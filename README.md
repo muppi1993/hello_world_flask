@@ -11,9 +11,8 @@ You need
 installed, as well as the dependencies in requirements.txt. These can be installed with with `pip install -r requirements.txt`
 
 Go to the project folder and
-1. run the flask app with `flask run`
-2. in a second terminal, start the Redis server in a docker container with `./scripts/redis start`. Then start a worker with `rqworker`
-3. in a third terminal, you can query the different Routes:
+1. run `./scripts/run` to start the flask app, the Redis server and a worker.
+2. In a second terminal, you can query the different Routes:
   - At /json you can submit data in json format and receive a json with a greeting and timestamp back
   
     Run 
@@ -38,4 +37,4 @@ Go to the project folder and
     curl http://127.0.0.1:5000/status/JobID
     curl http://127.0.0.1:5000/result/JobID
     ```
-4. At the end, stop the docker container running `./scripts/redis stop`
+3. At the end, stop the flask app, Redis server and worker in the first terminal with ctrl+c.
