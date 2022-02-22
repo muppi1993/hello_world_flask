@@ -1,0 +1,5 @@
+mass1	input_data/6930_8#9.fa
+mass2	input_data/6952_4#3.fa
+mass3	input_data/7553_4#5.fa
+mass4	input_data/7622_5#75.fa
+mass5	input_data/7622_5#91.fa

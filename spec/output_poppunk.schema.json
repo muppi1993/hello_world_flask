@@ -1,0 +1,11 @@
+{   
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "output_poppunk",
+    "type": "object",
+    "properties": {
+        "id": {"type": "string"},
+        "status": {"type": "string"},
+        "result": {"type": "string"}
+    },
+    "required": ["id","status","result"]
+}
