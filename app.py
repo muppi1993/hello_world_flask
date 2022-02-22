@@ -5,6 +5,7 @@ import datetime
 from redis import Redis
 from rq import Queue
 from rq.job import Job
+from importlib import metadata
 
 from rq_function import add, count_lines, poppunk_assign
 
@@ -81,3 +82,11 @@ def get_result(id):
         return "Result not ready yet\n"
     else:
         return str(job.result)+"\n"
+
+#get version number
+@app.route("/version")
+def get_version():
+    version = metadata.version('flask-tutorial')
+    return  version + '\n'
+    
+    # curl http://127.0.0.1:5000/version
