@@ -37,4 +37,8 @@ Go to the project folder and
     curl http://127.0.0.1:5000/status/JobID
     curl http://127.0.0.1:5000/result/JobID
     ```
+  - At /version the version number of this application is returned. To run this, you must first package this project with `python -m build`, then install it with `pip install .` Once you've done this, you can query:
+    ```
+    curl http://127.0.0.1:5000/version
+    ```
 3. At the end, stop the flask app, Redis server and worker in the first terminal with ctrl+c.
